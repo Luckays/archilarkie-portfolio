@@ -2,6 +2,8 @@
 
 Statické portfolio připravené pro GitHub Pages. Nevyžaduje sestavení ani instalaci balíčků.
 
+Soubor `portfolio-a5.html` obsahuje interaktivní náhled papírového portfolia. Tlačítko **Tisk / uložit PDF** vytvoří stránky ve formátu A5 na šířku (210 × 148 mm).
+
 ## Lokální náhled
 
 Otevřete `index.html` v prohlížeči nebo spusťte ve složce projektu jednoduchý lokální server.

@@ -75,4 +75,3 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   show(0);
 });
 
-document.querySelector('#year').textContent = new Date().getFullYear();
