@@ -100,6 +100,77 @@ button, a { font: inherit; }
 .split-images img, .triptych img { width: 100%; height: 100%; min-height: 0; object-fit: cover; }
 .triptych { display: grid; grid-template-columns: 1.42fr .58fr; grid-template-rows: 1fr 1fr; gap: 1.2mm; background: var(--ink); }
 .triptych img:first-child { grid-row: 1/3; }
+
+/* Each project uses the geometry of its own material. */
+.vymenek-grid {
+  display: grid;
+  grid-template-columns: 1.42fr .58fr;
+  grid-template-rows: 1.08fr .92fr;
+  gap: 1.2mm;
+  background: var(--ink);
+}
+.vymenek-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.vymenek-grid .render { object-fit: cover; }
+.vymenek-grid .plan {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  object-fit: contain;
+  padding: 2.5mm;
+  background: #f7f7f3;
+}
+.vymenek-grid .section { object-fit: contain; padding: 1.6mm; background: #f7f7f3; }
+
+.roubenka-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.22fr .78fr;
+  gap: 1.2mm;
+  background: var(--ink);
+}
+.roubenka-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; }
+.roubenka-grid .original { grid-column: 1 / 3; object-position: 50% 52%; }
+
+.proposal-grid {
+  display: grid;
+  grid-template-rows: 1.28fr .72fr;
+  gap: 1.2mm;
+  background: var(--ink);
+}
+.proposal-grid img { width: 100%; height: 100%; min-height: 0; }
+.proposal-grid .proposal-view { object-fit: cover; }
+.proposal-grid .proposal-plan { object-fit: contain; padding: 2mm 4mm; background: #f8f8f5; }
+
+.lumion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.25fr .75fr;
+  gap: 1.2mm;
+  background: var(--ink);
+}
+.lumion-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; background: #20201e; }
+.lumion-grid img:first-child { grid-column: 1 / 3; object-fit: cover; }
+
+.plovarna-grid {
+  display: grid;
+  grid-template-rows: 1.35fr .65fr;
+  gap: 1.2mm;
+  background: var(--ink);
+}
+.plovarna-grid img { width: 100%; height: 100%; min-height: 0; }
+.plovarna-grid .interior { object-fit: cover; }
+.plovarna-grid .furniture { object-fit: contain; padding: 1.5mm 3mm; background: #f8f8f5; }
+
+.pasport-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.12fr .88fr;
+  gap: 1.2mm;
+  background: #bfc2bd;
+}
+.technical .project-visual.pasport-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; padding: 1.5mm; background: #f8f8f5; }
+.pasport-grid .pasport-plan { grid-column: 1 / 3; }
+.technical .pasport-grid .pasport-model { mix-blend-mode: normal; }
+
 .technical { background: #e3e4df; }
 .technical .project-visual { background: #d6d8d4; }
 .technical .project-visual img { object-fit: contain; padding: 6mm; mix-blend-mode: multiply; }
