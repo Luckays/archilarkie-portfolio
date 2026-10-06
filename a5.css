@@ -104,20 +104,12 @@ button, a { font: inherit; }
 /* Each project uses the geometry of its own material. */
 .vymenek-grid {
   display: grid;
-  grid-template-columns: 1.42fr .58fr;
   grid-template-rows: 1.08fr .92fr;
   gap: 1.2mm;
   background: var(--ink);
 }
 .vymenek-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; }
 .vymenek-grid .render { object-fit: cover; }
-.vymenek-grid .plan {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  object-fit: contain;
-  padding: 2.5mm;
-  background: #f7f7f3;
-}
 .vymenek-grid .section { object-fit: contain; padding: 1.6mm; background: #f7f7f3; }
 
 .roubenka-grid {
@@ -164,15 +156,36 @@ button, a { font: inherit; }
   gap: 1.2mm;
   background: #bfc2bd;
 }
-.technical .project-visual.pasport-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; padding: 1.5mm; background: #f8f8f5; }
+.technical .project-visual.pasport-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; padding: 1.5mm; background: #d4d6d1; mix-blend-mode: multiply; }
 .pasport-grid .pasport-plan { grid-column: 1 / 3; }
-.technical .pasport-grid .pasport-model { mix-blend-mode: normal; }
 
 .technical { background: #e3e4df; }
 .technical .project-visual { background: #d6d8d4; }
 .technical .project-visual img { object-fit: contain; padding: 6mm; mix-blend-mode: multiply; }
 .paper-project-copy { position: relative; align-self: stretch; display: flex; flex-direction: column; padding: 9mm 9mm 8mm; }
 .paper-project-copy::before { content: "PORTFOLIO / ARCHILARKIE"; display: block; padding-bottom: 2mm; border-bottom: 1px solid currentColor; color: var(--muted); font-size: 5.5px; letter-spacing: .15em; }
+.paper-project-copy::after {
+  content: "QR";
+  position: absolute;
+  top: 22mm;
+  right: 9mm;
+  width: 15mm;
+  height: 15mm;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(21,21,19,.3);
+  background:
+    linear-gradient(90deg, currentColor 1px, transparent 1px) 0 0 / 3mm 3mm,
+    linear-gradient(currentColor 1px, transparent 1px) 0 0 / 3mm 3mm;
+  color: rgba(21,21,19,.1);
+  font-size: 6px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+.project-sheet.reverse .paper-project-copy::after {
+  border-color: rgba(255,255,255,.38);
+  color: rgba(255,255,255,.11);
+}
 .paper-number { display: block; margin-top: 7mm; font-family: Manrope,sans-serif; font-size: 13mm; font-weight: 500; line-height: .8; letter-spacing: -.06em; }
 .paper-project-copy h2 { margin: auto 0 4.5mm; font-size: clamp(23px,3vw,42px); }
 .paper-project-copy > p { margin: 0 0 2.3mm; color: #575650; font-size: 9px; line-height: 1.44; }
