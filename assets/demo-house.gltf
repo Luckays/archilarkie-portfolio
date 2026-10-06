@@ -1,0 +1,36 @@
+{
+  "asset": { "version": "2.0", "generator": "Archilarkie portfolio" },
+  "extensionsUsed": ["KHR_materials_unlit"],
+  "scene": 0,
+  "scenes": [{ "nodes": [0] }],
+  "nodes": [{ "mesh": 0, "rotation": [0, 0.3826834, 0, 0.9238795] }],
+  "meshes": [{
+    "primitives": [{
+      "attributes": { "POSITION": 0 },
+      "indices": 1,
+      "material": 0
+    }]
+  }],
+  "materials": [{
+    "name": "Architectural white",
+    "pbrMetallicRoughness": {
+      "baseColorFactor": [0.86, 0.85, 0.81, 1],
+      "metallicFactor": 0,
+      "roughnessFactor": 0.9
+    },
+    "extensions": { "KHR_materials_unlit": {} },
+    "doubleSided": true
+  }],
+  "buffers": [{
+    "uri": "data:application/octet-stream;base64,AACAvwAAAAAAAIC/AACAPwAAAAAAAIC/AACAPwAAgD8AAIC/AAAAAGZm5j8AAIC/AACAvwAAgD8AAIC/AACAvwAAAAAAAIA/AACAPwAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAGZm5j8AAIA/AACAvwAAgD8AAIA/AAABAAIAAAACAAQABAACAAMABQAHAAYABQAJAAcACQAIAAcAAAAFAAYAAAAGAAEAAQAGAAcAAQAHAAIAAgAHAAgAAgAIAAMAAwAIAAkAAwAJAAQABAAJAAUABAAFAAAA",
+    "byteLength": 216
+  }],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 120, "target": 34962 },
+    { "buffer": 0, "byteOffset": 120, "byteLength": 96, "target": 34963 }
+  ],
+  "accessors": [
+    { "bufferView": 0, "componentType": 5126, "count": 10, "type": "VEC3", "min": [-1, 0, -1], "max": [1, 1.8, 1] },
+    { "bufferView": 1, "componentType": 5123, "count": 48, "type": "SCALAR", "min": [0], "max": [9] }
+  ]
+}

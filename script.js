@@ -28,42 +28,51 @@ filters.forEach((button) => {
   });
 });
 
-const dialog = document.querySelector('.project-dialog');
-const dialogImage = dialog.querySelector('.dialog-image');
-const dialogTitle = dialog.querySelector('#dialog-title');
-const dialogMeta = dialog.querySelector('.dialog-meta');
-const dialogDescription = dialog.querySelector('.dialog-description');
-const closeButton = dialog.querySelector('.dialog-close');
+document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+  const track = carousel.querySelector('.project-track');
+  const slides = [...carousel.querySelectorAll('.project-slide')];
+  const currentLabel = carousel.querySelector('.current');
+  const previous = carousel.querySelector('.carousel-prev');
+  const next = carousel.querySelector('.carousel-next');
+  let index = 0;
+  let pointerStart = null;
+  let pointerDelta = 0;
 
-function openProject(project) {
-  dialogImage.src = project.dataset.image;
-  dialogImage.alt = project.querySelector('img').alt;
-  dialogTitle.textContent = project.dataset.title;
-  dialogMeta.textContent = project.dataset.meta;
-  dialogDescription.textContent = project.dataset.description;
-  dialog.showModal();
-  document.body.classList.add('dialog-open');
-}
+  const show = (newIndex) => {
+    index = (newIndex + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    currentLabel.textContent = String(index + 1).padStart(2, '0');
+    slides.forEach((slide, slideIndex) => slide.setAttribute('aria-hidden', String(slideIndex !== index)));
+  };
 
-projects.forEach((project) => {
-  project.addEventListener('click', () => openProject(project));
-  project.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openProject(project);
-    }
+  previous.addEventListener('click', () => show(index - 1));
+  next.addEventListener('click', () => show(index + 1));
+
+  carousel.tabIndex = 0;
+  carousel.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') show(index - 1);
+    if (event.key === 'ArrowRight') show(index + 1);
   });
-});
 
-function closeDialog() {
-  dialog.close();
-  document.body.classList.remove('dialog-open');
-}
+  carousel.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('model-viewer, button')) return;
+    pointerStart = event.clientX;
+    pointerDelta = 0;
+    carousel.setPointerCapture(event.pointerId);
+  });
 
-closeButton.addEventListener('click', closeDialog);
-dialog.addEventListener('click', (event) => {
-  if (event.target === dialog) closeDialog();
+  carousel.addEventListener('pointermove', (event) => {
+    if (pointerStart === null) return;
+    pointerDelta = event.clientX - pointerStart;
+  });
+
+  carousel.addEventListener('pointerup', () => {
+    if (Math.abs(pointerDelta) > 45) show(index + (pointerDelta < 0 ? 1 : -1));
+    pointerStart = null;
+    pointerDelta = 0;
+  });
+
+  show(0);
 });
-dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
 
 document.querySelector('#year').textContent = new Date().getFullYear();
