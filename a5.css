@@ -104,13 +104,15 @@ button, a { font: inherit; }
 /* Each project uses the geometry of its own material. */
 .vymenek-grid {
   display: grid;
-  grid-template-rows: 1.08fr .92fr;
+  grid-template-columns: 1.52fr .48fr;
+  grid-template-rows: 1.12fr .88fr;
   gap: 1.2mm;
   background: var(--ink);
 }
 .vymenek-grid img { width: 100%; height: 100%; min-width: 0; min-height: 0; }
-.vymenek-grid .render { object-fit: cover; }
+.vymenek-grid .render { grid-column: 1 / 3; object-fit: contain; background: #d8d8d3; }
 .vymenek-grid .section { object-fit: contain; padding: 1.6mm; background: #f7f7f3; }
+.vymenek-grid .plan { object-fit: contain; padding: 1.6mm; background: #f7f7f3; }
 
 .roubenka-grid {
   display: grid;

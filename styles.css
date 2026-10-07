@@ -68,8 +68,8 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .outline-link { display: inline-block; margin-top: 1.25rem; padding: .85rem 1.2rem; border: 1px solid var(--ink); text-decoration: none; transition: .2s; }
 .outline-link:hover { background: var(--ink); color: var(--paper); }
 .portrait-frame { margin: 3rem 0 0; aspect-ratio: 4/5; overflow: hidden; }
-.portrait-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: filter .4s; }
-.portrait-frame:hover img { filter: grayscale(0); }
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0); transition: filter .4s; }
+.portrait-frame:hover img { filter: grayscale(1); }
 
 .portfolio { background: var(--ink); }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
@@ -87,7 +87,7 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .project-media { position: relative; min-width: 0; overflow: hidden; background: #292925; touch-action: pan-y; }
 .project-track { display: flex; transition: transform .55s cubic-bezier(.22,.72,.22,1); will-change: transform; }
 .project-slide { position: relative; flex: 0 0 100%; margin: 0; aspect-ratio: 16/10; overflow: hidden; background: #dddcd5; }
-.project-slide img { width: 100%; height: 100%; object-fit: cover; }
+.project-slide img { width: 100%; height: 100%; object-fit: contain; padding: clamp(.35rem, 1vw, .8rem); background: #dddcd5; }
 .project-slide figcaption { position: absolute; left: 1rem; bottom: 1rem; padding: .45rem .7rem; color: var(--paper); background: rgba(23,23,20,.76); font-size: .72rem; letter-spacing: .04em; }
 .project-model { background: #d9d8d1; background-image: linear-gradient(rgba(23,23,20,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,20,.07) 1px, transparent 1px); background-size: 32px 32px; }
 .project-model model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
@@ -114,6 +114,20 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .contact-grid span { display: block; margin-bottom: .65rem; color: var(--accent); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
 footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 2rem var(--pad); border-top: 1px solid var(--line); font-size: .8rem; }
 footer p { color: var(--muted); }
+
+/* CV viewer */
+.cv-page { min-height: 100svh; }
+.cv-header { position: relative; }
+.cv-main { padding: clamp(3rem, 6vw, 6rem) var(--pad) var(--pad); }
+.cv-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }
+.cv-heading h1 { font-size: clamp(3.5rem, 7vw, 7rem); }
+.cv-heading .eyebrow { margin-bottom: 1rem; }
+.cv-download { flex: none; padding: .85rem 1.2rem; border: 1px solid var(--paper); text-decoration: none; transition: .2s; }
+.cv-download:hover, .cv-download:focus-visible { color: var(--ink); background: var(--paper); }
+.cv-document { min-height: 70svh; padding: clamp(.5rem, 1.5vw, 1.25rem); background: #d9d8d1; }
+.cv-document iframe { display: block; width: 100%; height: 78svh; border: 0; background: white; }
+.cv-document > p { display: none; margin: 1rem 0 0; color: var(--ink); }
+.cv-document a { color: var(--ink); }
 
 @keyframes reveal { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
 
@@ -150,6 +164,10 @@ footer p { color: var(--muted); }
   .carousel-prev { left: .6rem; }
   .carousel-next { right: .6rem; }
   .contact-grid { grid-template-columns: 1fr; }
+  .cv-heading { display: block; }
+  .cv-download { display: inline-block; margin-top: 2rem; }
+  .cv-document { padding: .35rem; }
+  .cv-document iframe { height: 72svh; }
   footer { align-items: flex-start; flex-direction: column; }
 }
 
