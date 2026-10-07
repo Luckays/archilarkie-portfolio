@@ -116,11 +116,20 @@ footer { display: flex; justify-content: space-between; align-items: center; gap
 footer p { color: var(--muted); }
 
 /* Expandable CV inside the profile section */
-.cv-panel { grid-column: 2 / -1; width: 100%; margin-top: 1rem; border-top: 1px solid rgba(23,23,20,.28); }
-.cv-panel summary { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; cursor: pointer; list-style: none; font-family: Manrope,sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.5rem); font-weight: 500; }
+.cv-panel { grid-column: 2 / -1; width: 100%; margin-top: clamp(2rem, 5vw, 5rem); color: var(--paper); background: var(--ink); box-shadow: 0 1.5rem 4rem rgba(23,23,20,.14); }
+.cv-panel summary { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 2rem; min-height: 11rem; padding: clamp(2rem, 4vw, 3.5rem); cursor: pointer; list-style: none; overflow: hidden; transition: background .3s ease; }
+.cv-panel summary::before { content: "CV"; position: absolute; right: clamp(6rem, 12vw, 12rem); top: 50%; transform: translateY(-52%); color: rgba(241,240,234,.045); font: 500 clamp(7rem, 15vw, 14rem)/1 Manrope,sans-serif; letter-spacing: -.09em; pointer-events: none; }
+.cv-panel summary:hover, .cv-panel summary:focus-visible { background: #20201c; }
 .cv-panel summary::-webkit-details-marker { display: none; }
-.cv-state::after { content: "Rozbalit +"; font-family: "DM Sans",sans-serif; font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
-.cv-panel[open] .cv-state::after { content: "Zavřít −"; }
+.cv-summary-copy { position: relative; z-index: 1; display: grid; gap: .45rem; }
+.cv-label { color: var(--accent); font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.cv-summary-copy strong { font: 500 clamp(2.2rem, 5vw, 5rem)/.95 Manrope,sans-serif; letter-spacing: -.055em; }
+.cv-summary-copy small { color: var(--muted); font-size: clamp(.8rem, 1.1vw, .95rem); font-weight: 400; }
+.cv-state { position: relative; z-index: 1; display: grid; place-items: center; flex: 0 0 auto; width: clamp(4.5rem, 8vw, 6.5rem); aspect-ratio: 1; border: 1px solid rgba(241,240,234,.5); border-radius: 50%; transition: color .25s, background .25s, border-color .25s, transform .35s; }
+.cv-state::after { content: "Otevřít\A CV +"; white-space: pre; text-align: center; font-family: "DM Sans",sans-serif; font-size: .65rem; font-weight: 500; line-height: 1.35; letter-spacing: .08em; text-transform: uppercase; }
+.cv-panel summary:hover .cv-state, .cv-panel summary:focus-visible .cv-state { color: white; background: var(--accent); border-color: var(--accent); transform: scale(1.06); }
+.cv-panel[open] .cv-state { color: var(--ink); background: var(--paper); border-color: var(--paper); transform: rotate(180deg); }
+.cv-panel[open] .cv-state::after { content: "Zavřít\A −"; }
 .cv-panel-body { overflow: hidden; padding: clamp(1.5rem, 4vw, 4rem); color: var(--paper); background: var(--ink); }
 .cv-intro { display: grid; grid-template-columns: .55fr 1.45fr; gap: clamp(1.5rem, 5vw, 6rem); padding-bottom: clamp(2rem, 5vw, 5rem); border-bottom: 1px solid var(--line); }
 .cv-kicker { margin: 0; color: var(--accent); font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
@@ -183,6 +192,11 @@ footer p { color: var(--muted); }
   .carousel-next { right: .6rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .cv-panel { grid-column: 1; }
+  .cv-panel summary { min-height: 9rem; padding: 1.5rem; gap: 1rem; }
+  .cv-panel summary::before { right: 4rem; font-size: 7rem; }
+  .cv-summary-copy strong { font-size: clamp(2rem, 11vw, 3.2rem); }
+  .cv-summary-copy small { max-width: 14rem; }
+  .cv-state { width: 4.25rem; }
   .cv-intro, .cv-entry, .cv-grid { grid-template-columns: 1fr; }
   .cv-contact-row, .cv-wide { grid-column: 1; }
   .skill-groups { grid-template-columns: 1fr; }
