@@ -75,3 +75,8 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   show(0);
 });
 
+const cvPanel = document.querySelector('#cv');
+if (cvPanel && window.location.hash === '#cv') {
+  cvPanel.open = true;
+}
+
