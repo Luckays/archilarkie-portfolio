@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171714">
+  <meta name="description" content="BIM prohlížečka projektu Výměnek pro mladý pár.">
+  <title>BIM model — Výměnek pro mladý pár</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-CefO4HwI.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DvjLXIBQ.css">
+</head>
+<body>
+  <main class="viewer-shell">
+    <header class="viewer-header">
+      <a class="back-link" href="../index.html?project=1#portfolio" aria-label="Zpět do portfolia">← Portfolio</a>
+      <div class="viewer-title"><span>BIM / 01</span><h1>Výměnek pro mladý pár</h1></div>
+      <button class="panel-toggle" type="button" aria-expanded="true" aria-controls="bim-panel">Informace</button>
+    </header>
+
+    <section class="viewport" aria-label="Interaktivní BIM model">
+      <canvas id="bim-canvas"></canvas>
+      <div class="loading" id="loading" role="status" aria-live="polite">
+        <div class="loading-mark"></div>
+        <p id="loading-label">Připravuji BIM prohlížečku…</p>
+        <div class="loading-track"><span id="loading-progress"></span></div>
+      </div>
+      <div class="viewer-hint">Tažením otáčejte · kolečkem přibližujte · kliknutím vyberte prvek</div>
+      <div class="viewer-tools" aria-label="Nástroje modelu">
+        <button type="button" id="home-view">Výchozí pohled</button>
+        <button type="button" id="wireframe">Hrany</button>
+        <button type="button" id="xray">Průhledný model</button>
+        <button type="button" id="hide-selected" disabled>Skrýt vybrané</button>
+        <button type="button" id="show-all">Zobrazit vše</button>
+      </div>
+    </section>
+
+    <aside class="bim-panel" id="bim-panel">
+      <section class="panel-section intro-panel">
+        <p class="eyebrow">Živý IFC model</p>
+        <p>Vyberte konstrukci přímo v modelu. Zobrazí se její IFC typ, název, materiály a dostupné vlastnosti.</p>
+      </section>
+
+      <section class="panel-section">
+        <div class="section-heading"><h2>Řez modelem</h2><label class="switch"><input type="checkbox" id="section-enabled"><span></span></label></div>
+        <input class="section-range" id="section-range" type="range" min="0" max="100" value="100" disabled aria-label="Výška vodorovného řezu">
+      </section>
+
+      <section class="panel-section structure-section">
+        <h2>Struktura projektu</h2>
+        <div id="spatial-tree" class="spatial-tree"><p class="empty-state">Načítám strukturu…</p></div>
+      </section>
+
+      <section class="panel-section properties-section">
+        <h2>Vlastnosti prvku</h2>
+        <div id="properties"><p class="empty-state">Klikněte na libovolný prvek modelu.</p></div>
+      </section>
+
+      <footer class="panel-footer"><span id="model-stats">IFC2X3</span><a href="../assets/models/vymenek/vymenek.ifc" download>Stáhnout IFC ↓</a></footer>
+    </aside>
+  </main>
+</body>
+</html>

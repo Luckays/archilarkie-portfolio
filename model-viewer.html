@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interaktivní 3D model projektu Výměnek pro mladý pár.">
+  <meta name="theme-color" content="#171714">
+  <title>3D model — Výměnek pro mladý pár</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="model-viewer.css?v=20261016-1">
+</head>
+<body>
+  <main class="model-page">
+    <header>
+      <a href="index.html?project=1&slide=4#portfolio">← Portfolio</a>
+      <div><span>3D / 01</span><h1>Výměnek pro mladý pár</h1></div>
+      <a href="bim-viewer/">BIM model ↗</a>
+    </header>
+    <section class="model-stage">
+      <model-viewer src="assets/models/vymenek/vymenek.glb" alt="Interaktivní 3D model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" auto-rotate rotation-per-second="5deg" shadow-intensity="1.2" shadow-softness=".7" exposure="1.05" environment-image="neutral" interaction-prompt="auto">
+        <div class="model-loading" slot="poster">Načítám 3D model…</div>
+        <button class="model-ar" slot="ar-button">Zobrazit v prostoru</button>
+      </model-viewer>
+      <p class="hint">Tažením otáčejte · kolečkem přibližujte · dvojklikem zaostřete</p>
+      <div class="model-meta"><span>Klasický 3D model</span><p>Geometrie a materiálové barvy bez BIM dat.</p></div>
+    </section>
+  </main>
+  <script type="module" src="assets/vendor/model-viewer-4.3.1.min.js"></script>
+</body>
+</html>

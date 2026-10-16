@@ -102,6 +102,12 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .project-info h3 { margin: 1.2rem 0 1.5rem; font-size: clamp(2rem, 3.5vw, 4rem); line-height: 1.02; }
 .project-description { max-width: 31rem; color: var(--muted); font-size: .95rem; }
 .project-scope { margin-top: 1.25rem; color: var(--paper); font-size: .82rem; }
+.project-actions { display: grid; gap: .7rem; margin-top: 2rem; }
+.project-actions a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--line); color: var(--paper); font-size: .76rem; letter-spacing: .03em; text-decoration: none; transition: color .2s; }
+.project-actions a:last-child { border-bottom: 1px solid var(--line); }
+.project-actions a span { color: var(--accent); font-size: 1rem; transition: transform .2s; }
+.project-actions a:hover, .project-actions a:focus-visible { color: var(--accent); }
+.project-actions a:hover span, .project-actions a:focus-visible span { transform: translate(.18rem, -.18rem); }
 .single-slide .project-track { transform: none !important; }
 
 .contact { padding-top: 9rem; padding-bottom: 7rem; }
