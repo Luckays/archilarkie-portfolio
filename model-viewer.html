@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="model-viewer.css?v=20261016-3">
+  <link rel="stylesheet" href="model-viewer.css?v=20261016-4">
 </head>
 <body>
   <main class="model-page">
@@ -18,22 +18,23 @@
       <div><span>3D / 01</span><h1>Výměnek pro mladý pár</h1></div>
       <a href="bim-viewer/">BIM model ↗</a>
     </header>
-    <section class="model-stage">
+    <section class="model-stage" data-model-explorer data-auto-rotate="true" tabindex="0">
       <model-viewer id="house-model" src="assets/models/vymenek/vymenek.glb" alt="Interaktivní 3D model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" min-camera-orbit="auto auto 1%" max-camera-orbit="auto auto 500%" min-field-of-view="5deg" auto-rotate rotation-per-second="5deg" shadow-intensity="1.2" shadow-softness=".7" exposure="1.05" environment-image="neutral" interaction-prompt="auto">
         <div class="model-loading" slot="poster">Načítám 3D model…</div>
         <button class="model-ar" slot="ar-button">Zobrazit v prostoru</button>
       </model-viewer>
       <div class="view-controls" aria-label="Rychlé pohledy modelu">
-        <button type="button" id="exterior-view" class="is-active">Exteriér</button>
-        <button type="button" id="interior-view">Vstoupit dovnitř</button>
+        <button type="button" data-model-view="exterior" class="is-active">Exteriér</button>
+        <button type="button" data-model-view="interior">Vstoupit dovnitř</button>
       </div>
-      <div class="walk-controls" id="walk-controls" aria-label="Pohyb v interiéru" hidden>
+      <label class="focal-control"><span>Ohnisko <output data-focal-output>35 mm</output></span><input type="range" min="14" max="80" value="35" step="1" data-focal-length aria-label="Ohnisková vzdálenost"></label>
+      <div class="walk-controls" data-walk-controls aria-label="Pohyb v interiéru" hidden>
         <span>Procházení interiéru</span>
         <div class="walk-pad">
-          <button type="button" data-move="forward" aria-label="Dopředu">↑</button>
-          <button type="button" data-move="left" aria-label="Doleva">←</button>
-          <button type="button" data-move="back" aria-label="Dozadu">↓</button>
-          <button type="button" data-move="right" aria-label="Doprava">→</button>
+          <button type="button" data-model-move="forward" aria-label="Dopředu">↑</button>
+          <button type="button" data-model-move="left" aria-label="Doleva">←</button>
+          <button type="button" data-model-move="back" aria-label="Dozadu">↓</button>
+          <button type="button" data-model-move="right" aria-label="Doprava">→</button>
         </div>
         <small>WASD / šipky · tažením se rozhlížejte</small>
       </div>
@@ -42,72 +43,6 @@
     </section>
   </main>
   <script type="module" src="assets/vendor/model-viewer-4.3.1.min.js"></script>
-  <script>
-    const model = document.querySelector("#house-model");
-    const exteriorButton = document.querySelector("#exterior-view");
-    const interiorButton = document.querySelector("#interior-view");
-    const walkControls = document.querySelector("#walk-controls");
-    let interiorMode = false;
-
-    function activate(button) {
-      [exteriorButton, interiorButton].forEach((item) => item.classList.toggle("is-active", item === button));
-    }
-
-    exteriorButton.addEventListener("click", () => {
-      model.autoRotate = true;
-      model.cameraTarget = "auto auto auto";
-      model.cameraOrbit = "45deg 65deg 90%";
-      model.fieldOfView = "auto";
-      model.jumpCameraToGoal();
-      interiorMode = false;
-      walkControls.hidden = true;
-      activate(exteriorButton);
-    });
-
-    interiorButton.addEventListener("click", () => {
-      const center = model.getBoundingBoxCenter();
-      const size = model.getDimensions();
-      const radius = Math.max(size.x, size.z) * 0.02;
-      model.autoRotate = false;
-      model.cameraTarget = `${center.x}m ${center.y - size.y * 0.1}m ${center.z}m`;
-      model.cameraOrbit = `200deg 88deg ${radius}m`;
-      model.fieldOfView = "75deg";
-      model.jumpCameraToGoal();
-      interiorMode = true;
-      walkControls.hidden = false;
-      activate(interiorButton);
-    });
-
-    function moveInside(direction) {
-      if (!interiorMode) return;
-      const target = model.getCameraTarget();
-      const orbit = model.getCameraOrbit();
-      const size = model.getDimensions();
-      const step = Math.max(size.x, size.z) * 0.012;
-      const forward = { x: -Math.sin(orbit.theta), z: -Math.cos(orbit.theta) };
-      const right = { x: Math.cos(orbit.theta), z: -Math.sin(orbit.theta) };
-      const vectors = {
-        forward,
-        back: { x: -forward.x, z: -forward.z },
-        right,
-        left: { x: -right.x, z: -right.z },
-      };
-      const vector = vectors[direction];
-      model.cameraTarget = `${target.x + vector.x * step}m ${target.y}m ${target.z + vector.z * step}m`;
-    }
-
-    walkControls.querySelectorAll("[data-move]").forEach((button) => {
-      button.addEventListener("click", () => moveInside(button.dataset.move));
-    });
-
-    window.addEventListener("keydown", (event) => {
-      if (!interiorMode || /input|textarea/i.test(document.activeElement.tagName)) return;
-      const keyMap = { ArrowUp: "forward", w: "forward", ArrowDown: "back", s: "back", ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right" };
-      const direction = keyMap[event.key];
-      if (!direction) return;
-      event.preventDefault();
-      moveInside(direction);
-    });
-  </script>
+  <script src="model-controls.js?v=20261016-1"></script>
 </body>
 </html>

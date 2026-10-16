@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23171714'/%3E%3Cpath d='M15 48V18h7v23h27v7H15Zm15-7V26h7v15h-7Zm12 0V12h7v29h-7Z' fill='%23e65a3a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20261016-1">
+  <link rel="stylesheet" href="styles.css?v=20261016-2">
 </head>
 <body>
   <a class="skip-link" href="#obsah">Přejít na obsah</a>
@@ -76,12 +76,17 @@
       <div class="filters" role="group" aria-label="Filtrovat projekty"><button class="filter is-active" type="button" data-filter="all">Vše</button><button class="filter" type="button" data-filter="bydleni">Bydlení</button><button class="filter" type="button" data-filter="verejne">Veřejné</button><button class="filter" type="button" data-filter="digitalni">BIM & vizualizace</button></div>
 
       <div class="project-list">
-        <article class="project" data-category="bydleni">
+        <article class="project" id="vymenek" data-category="bydleni">
           <div class="project-media" data-carousel><div class="project-track">
             <figure class="project-slide"><img src="assets/vymenek-1.webp" alt="Vizualizace výměnku pro mladý pár" loading="lazy"><figcaption>Exteriérová studie</figcaption></figure>
             <figure class="project-slide"><img src="assets/vymenek-2.webp" alt="Půdorys výměnku" loading="lazy"><figcaption>Půdorys 1. NP</figcaption></figure>
             <figure class="project-slide"><img src="assets/vymenek-3.webp" alt="Řez navrženým výměnkem" loading="lazy"><figcaption>Řez objektem</figcaption></figure>
-            <figure class="project-slide project-model"><model-viewer src="assets/models/vymenek/vymenek.glb" alt="Interaktivní architektonický model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" min-camera-orbit="auto auto 1%" max-camera-orbit="auto auto 500%" min-field-of-view="5deg" shadow-intensity="1" exposure="1.05" interaction-prompt="auto" loading="lazy"></model-viewer><figcaption>Interaktivní 3D · táhněte pro otočení</figcaption></figure>
+            <figure class="project-slide project-model" data-model-explorer tabindex="0">
+              <model-viewer src="assets/models/vymenek/vymenek.glb" alt="Interaktivní architektonický model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" min-camera-orbit="auto auto 1%" max-camera-orbit="auto auto 500%" min-field-of-view="5deg" shadow-intensity="1" exposure="1.05" interaction-prompt="auto" loading="lazy"></model-viewer>
+              <div class="inline-model-toolbar"><button type="button" data-model-view="exterior" class="is-active">Exteriér</button><button type="button" data-model-view="interior">Interiér</button><label><span>Ohnisko <output data-focal-output>35 mm</output></span><input type="range" min="14" max="80" value="35" step="1" data-focal-length aria-label="Ohnisková vzdálenost"></label></div>
+              <div class="inline-walk-controls" data-walk-controls hidden><button type="button" data-model-move="forward" aria-label="Dopředu">↑</button><button type="button" data-model-move="left" aria-label="Doleva">←</button><button type="button" data-model-move="back" aria-label="Dozadu">↓</button><button type="button" data-model-move="right" aria-label="Doprava">→</button></div>
+              <figcaption>Interaktivní 3D · exteriér i interiér</figcaption>
+            </figure>
           </div><button class="carousel-arrow carousel-prev" type="button" aria-label="Předchozí položka">←</button><button class="carousel-arrow carousel-next" type="button" aria-label="Další položka">→</button><div class="carousel-status" aria-live="polite"><span class="current">01</span> / <span class="total">04</span></div></div>
           <div class="project-info"><span class="project-number">01</span><p class="project-type">Rodinné bydlení /2026</p><h3>Výměnek pro mladý pár</h3><p class="project-scope">Zhotovení studie a DSP</p><p class="project-description">Nové bydlení pro pár na pozemku se stávajícím RD.</p><div class="project-actions"><a href="model-viewer.html">Prohlédnout 3D model <span>↗</span></a><a href="bim-viewer/">Otevřít BIM model <span>↗</span></a></div></div>
         </article>
@@ -132,6 +137,7 @@
 
   <footer><a class="brand" href="#uvod"><span class="brand-mark" aria-hidden="true"></span><span>archilarkie</span></a><p>© 2024 Lucie Krivankova</p><a href="#uvod">Nahoru ↑</a></footer>
   <script type="module" src="assets/vendor/model-viewer-4.3.1.min.js"></script>
+  <script src="model-controls.js?v=20261016-1"></script>
   <script src="script.js?v=20261007-3"></script>
 </body>
 </html>

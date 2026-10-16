@@ -91,6 +91,22 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .project-slide figcaption { position: absolute; left: 1rem; bottom: 1rem; padding: .45rem .7rem; color: var(--paper); background: rgba(23,23,20,.76); font-size: .72rem; letter-spacing: .04em; }
 .project-model { background: #d9d8d1; background-image: linear-gradient(rgba(23,23,20,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,20,.07) 1px, transparent 1px); background-size: 32px 32px; }
 .project-model model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+.inline-model-toolbar { position: absolute; z-index: 3; top: 1rem; left: 1rem; display: grid; grid-template-columns: auto auto; gap: .35rem; width: min(15rem, calc(100% - 7rem)); }
+.inline-model-toolbar button { border: 1px solid rgba(23,23,20,.2); padding: .55rem .7rem; color: var(--ink); background: rgba(241,240,234,.92); cursor: pointer; font-size: .65rem; }
+.inline-model-toolbar button:hover, .inline-model-toolbar button.is-active { color: white; background: var(--accent); border-color: var(--accent); }
+.inline-model-toolbar button:disabled { opacity: .5; cursor: wait; }
+.inline-model-toolbar label { grid-column: 1 / -1; padding: .55rem .65rem; color: var(--ink); background: rgba(241,240,234,.92); font-size: .6rem; }
+.inline-model-toolbar label span { display: flex; justify-content: space-between; margin-bottom: .25rem; }
+.inline-model-toolbar output { color: var(--accent); font-weight: 600; }
+.inline-model-toolbar input { display: block; width: 100%; margin: 0; accent-color: var(--accent); }
+.inline-walk-controls { position: absolute; z-index: 3; right: 4.7rem; bottom: 1rem; display: grid; grid-template-columns: repeat(3, 2rem); gap: .2rem; }
+.inline-walk-controls[hidden] { display: none; }
+.inline-walk-controls button { width: 2rem; height: 2rem; border: 1px solid rgba(241,240,234,.25); color: var(--paper); background: rgba(23,23,20,.88); cursor: pointer; }
+.inline-walk-controls button:hover { background: var(--accent); }
+.inline-walk-controls button:first-child { grid-column: 2; }
+.inline-walk-controls button[data-model-move="left"] { grid-column: 1; grid-row: 2; }
+.inline-walk-controls button[data-model-move="back"] { grid-column: 2; grid-row: 2; }
+.inline-walk-controls button[data-model-move="right"] { grid-column: 3; grid-row: 2; }
 .carousel-arrow { position: absolute; z-index: 2; top: 50%; width: 3rem; height: 3rem; transform: translateY(-50%); border: 0; border-radius: 50%; color: var(--ink); background: rgba(241,240,234,.9); cursor: pointer; font-size: 1.2rem; transition: background .2s, transform .2s; }
 .carousel-arrow:hover, .carousel-arrow:focus-visible { background: var(--accent); color: white; transform: translateY(-50%) scale(1.06); }
 .carousel-prev { left: 1rem; }
@@ -193,6 +209,9 @@ footer p { color: var(--muted); }
   .section-heading > p { margin-top: 1.5rem; }
   .project { gap: 1.5rem; padding: 3rem 0; }
   .project-slide { aspect-ratio: 4 / 3; }
+  .inline-model-toolbar { top: .6rem; left: .6rem; width: min(12rem, calc(100% - 5rem)); }
+  .inline-model-toolbar button { padding: .45rem .5rem; font-size: .58rem; }
+  .inline-walk-controls { right: 3.8rem; bottom: .6rem; }
   .carousel-arrow { width: 2.7rem; height: 2.7rem; }
   .carousel-prev { left: .6rem; }
   .carousel-next { right: .6rem; }
