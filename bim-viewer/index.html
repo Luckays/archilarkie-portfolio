@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-CVDK6PKl.js"></script>
+  <script type="module" crossorigin src="./assets/index-Bk2IDOty.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-D8xqyPKC.css">
 </head>
 <body>
@@ -30,17 +30,15 @@
       <div class="viewer-hint">Tažením otáčejte · kolečkem přibližujte · kliknutím vyberte prvek</div>
       <div class="viewer-tools" aria-label="Nástroje modelu">
         <button type="button" id="home-view">Výchozí pohled</button>
-        <button type="button" id="wireframe">Hrany</button>
-        <button type="button" id="xray">Průhledný model</button>
-        <button type="button" id="hide-selected" disabled>Skrýt vybrané</button>
-        <button type="button" id="show-all">Zobrazit vše</button>
+        <button type="button" id="visual-mode" class="is-active">Texturovaný pohled</button>
+        <button type="button" id="bim-mode">BIM prvky</button>
       </div>
     </section>
 
     <aside class="bim-panel" id="bim-panel">
       <section class="panel-section intro-panel">
         <p class="eyebrow">Živý IFC model</p>
-        <p>Vyberte konstrukci přímo v modelu. Zobrazí se její IFC typ, název, materiály a dostupné vlastnosti.</p>
+        <p>Texturovaný model je propojený s IFC daty. Kliknutím na konstrukci zobrazíte její typ, název, materiály a dostupné vlastnosti.</p>
         <p class="model-stats" id="model-stats">IFC2X3</p>
       </section>
 

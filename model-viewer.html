@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="model-viewer.css?v=20261016-2">
+  <link rel="stylesheet" href="model-viewer.css?v=20261016-3">
 </head>
 <body>
   <main class="model-page">
@@ -27,7 +27,17 @@
         <button type="button" id="exterior-view" class="is-active">Exteriér</button>
         <button type="button" id="interior-view">Vstoupit dovnitř</button>
       </div>
-      <p class="hint">Tažením otáčejte · kolečkem projděte až dovnitř · pravým tlačítkem posouvejte</p>
+      <div class="walk-controls" id="walk-controls" aria-label="Pohyb v interiéru" hidden>
+        <span>Procházení interiéru</span>
+        <div class="walk-pad">
+          <button type="button" data-move="forward" aria-label="Dopředu">↑</button>
+          <button type="button" data-move="left" aria-label="Doleva">←</button>
+          <button type="button" data-move="back" aria-label="Dozadu">↓</button>
+          <button type="button" data-move="right" aria-label="Doprava">→</button>
+        </div>
+        <small>WASD / šipky · tažením se rozhlížejte</small>
+      </div>
+      <p class="hint">Tažením otáčejte · kolečkem přibližujte · pravým tlačítkem posouvejte</p>
       <div class="model-meta"><span>Klasický 3D model</span><p>Geometrie a materiálové barvy bez BIM dat.</p></div>
     </section>
   </main>
@@ -36,6 +46,8 @@
     const model = document.querySelector("#house-model");
     const exteriorButton = document.querySelector("#exterior-view");
     const interiorButton = document.querySelector("#interior-view");
+    const walkControls = document.querySelector("#walk-controls");
+    let interiorMode = false;
 
     function activate(button) {
       [exteriorButton, interiorButton].forEach((item) => item.classList.toggle("is-active", item === button));
@@ -47,19 +59,54 @@
       model.cameraOrbit = "45deg 65deg 90%";
       model.fieldOfView = "auto";
       model.jumpCameraToGoal();
+      interiorMode = false;
+      walkControls.hidden = true;
       activate(exteriorButton);
     });
 
     interiorButton.addEventListener("click", () => {
       const center = model.getBoundingBoxCenter();
       const size = model.getDimensions();
-      const radius = Math.max(size.x, size.z) * 0.035;
+      const radius = Math.max(size.x, size.z) * 0.02;
       model.autoRotate = false;
-      model.cameraTarget = `${center.x}m ${center.y + size.y * 0.12}m ${center.z}m`;
-      model.cameraOrbit = `20deg 78deg ${radius}m`;
-      model.fieldOfView = "55deg";
+      model.cameraTarget = `${center.x}m ${center.y - size.y * 0.1}m ${center.z}m`;
+      model.cameraOrbit = `200deg 88deg ${radius}m`;
+      model.fieldOfView = "75deg";
       model.jumpCameraToGoal();
+      interiorMode = true;
+      walkControls.hidden = false;
       activate(interiorButton);
+    });
+
+    function moveInside(direction) {
+      if (!interiorMode) return;
+      const target = model.getCameraTarget();
+      const orbit = model.getCameraOrbit();
+      const size = model.getDimensions();
+      const step = Math.max(size.x, size.z) * 0.012;
+      const forward = { x: -Math.sin(orbit.theta), z: -Math.cos(orbit.theta) };
+      const right = { x: Math.cos(orbit.theta), z: -Math.sin(orbit.theta) };
+      const vectors = {
+        forward,
+        back: { x: -forward.x, z: -forward.z },
+        right,
+        left: { x: -right.x, z: -right.z },
+      };
+      const vector = vectors[direction];
+      model.cameraTarget = `${target.x + vector.x * step}m ${target.y}m ${target.z + vector.z * step}m`;
+    }
+
+    walkControls.querySelectorAll("[data-move]").forEach((button) => {
+      button.addEventListener("click", () => moveInside(button.dataset.move));
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (!interiorMode || /input|textarea/i.test(document.activeElement.tagName)) return;
+      const keyMap = { ArrowUp: "forward", w: "forward", ArrowDown: "back", s: "back", ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right" };
+      const direction = keyMap[event.key];
+      if (!direction) return;
+      event.preventDefault();
+      moveInside(direction);
     });
   </script>
 </body>
