@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-CefO4HwI.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DvjLXIBQ.css">
+  <script type="module" crossorigin src="./assets/index-CVDK6PKl.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D8xqyPKC.css">
 </head>
 <body>
   <main class="viewer-shell">
@@ -41,6 +41,7 @@
       <section class="panel-section intro-panel">
         <p class="eyebrow">Živý IFC model</p>
         <p>Vyberte konstrukci přímo v modelu. Zobrazí se její IFC typ, název, materiály a dostupné vlastnosti.</p>
+        <p class="model-stats" id="model-stats">IFC2X3</p>
       </section>
 
       <section class="panel-section">
@@ -48,17 +49,10 @@
         <input class="section-range" id="section-range" type="range" min="0" max="100" value="100" disabled aria-label="Výška vodorovného řezu">
       </section>
 
-      <section class="panel-section structure-section">
-        <h2>Struktura projektu</h2>
-        <div id="spatial-tree" class="spatial-tree"><p class="empty-state">Načítám strukturu…</p></div>
-      </section>
-
       <section class="panel-section properties-section">
         <h2>Vlastnosti prvku</h2>
         <div id="properties"><p class="empty-state">Klikněte na libovolný prvek modelu.</p></div>
       </section>
-
-      <footer class="panel-footer"><span id="model-stats">IFC2X3</span><a href="../assets/models/vymenek/vymenek.ifc" download>Stáhnout IFC ↓</a></footer>
     </aside>
   </main>
 </body>

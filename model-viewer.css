@@ -17,6 +17,9 @@ model-viewer { width:100%; height:100%; --poster-color:#cbc9c1; --progress-bar-c
 .model-meta { position:absolute; top:1.5rem; left:1.5rem; width:min(18rem,calc(100% - 3rem)); padding:1.25rem; color:var(--paper); background:rgba(23,23,20,.88); backdrop-filter:blur(8px); }
 .model-meta span { color:var(--accent); font-size:.62rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
 .model-meta p { margin:.65rem 0 0; color:var(--muted); font-size:.78rem; }
+.view-controls { position:absolute; right:1.25rem; top:1.25rem; display:flex; gap:.4rem; }
+.view-controls button { border:1px solid rgba(23,23,20,.25); padding:.68rem .85rem; color:var(--ink); background:rgba(241,240,234,.92); cursor:pointer; font-size:.7rem; transition:color .2s,background .2s,border-color .2s; }
+.view-controls button:hover,.view-controls button.is-active { color:var(--paper); background:var(--accent); border-color:var(--accent); }
 .model-ar { position:absolute; right:1rem; bottom:1rem; border:0; padding:.75rem 1rem; color:var(--paper); background:var(--accent); }
 @media(max-width:680px){
   .model-page{grid-template-rows:4.5rem minmax(0,1fr)}
@@ -25,5 +28,7 @@ model-viewer { width:100%; height:100%; --poster-color:#cbc9c1; --progress-bar-c
   h1{max-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.9rem}
   header>a{font-size:.64rem}
   .model-meta{top:.75rem;left:.75rem;padding:1rem}
+  .view-controls{right:.75rem;top:auto;bottom:.75rem}
+  .view-controls button{padding:.58rem .65rem;font-size:.64rem}
   .hint{display:none}
 }

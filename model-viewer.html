@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="model-viewer.css?v=20261016-1">
+  <link rel="stylesheet" href="model-viewer.css?v=20261016-2">
 </head>
 <body>
   <main class="model-page">
@@ -19,14 +19,48 @@
       <a href="bim-viewer/">BIM model ↗</a>
     </header>
     <section class="model-stage">
-      <model-viewer src="assets/models/vymenek/vymenek.glb" alt="Interaktivní 3D model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" auto-rotate rotation-per-second="5deg" shadow-intensity="1.2" shadow-softness=".7" exposure="1.05" environment-image="neutral" interaction-prompt="auto">
+      <model-viewer id="house-model" src="assets/models/vymenek/vymenek.glb" alt="Interaktivní 3D model výměnku" camera-controls touch-action="pan-y" orientation="0deg -90deg 0deg" camera-orbit="45deg 65deg 90%" min-camera-orbit="auto auto 1%" max-camera-orbit="auto auto 500%" min-field-of-view="5deg" auto-rotate rotation-per-second="5deg" shadow-intensity="1.2" shadow-softness=".7" exposure="1.05" environment-image="neutral" interaction-prompt="auto">
         <div class="model-loading" slot="poster">Načítám 3D model…</div>
         <button class="model-ar" slot="ar-button">Zobrazit v prostoru</button>
       </model-viewer>
-      <p class="hint">Tažením otáčejte · kolečkem přibližujte · dvojklikem zaostřete</p>
+      <div class="view-controls" aria-label="Rychlé pohledy modelu">
+        <button type="button" id="exterior-view" class="is-active">Exteriér</button>
+        <button type="button" id="interior-view">Vstoupit dovnitř</button>
+      </div>
+      <p class="hint">Tažením otáčejte · kolečkem projděte až dovnitř · pravým tlačítkem posouvejte</p>
       <div class="model-meta"><span>Klasický 3D model</span><p>Geometrie a materiálové barvy bez BIM dat.</p></div>
     </section>
   </main>
   <script type="module" src="assets/vendor/model-viewer-4.3.1.min.js"></script>
+  <script>
+    const model = document.querySelector("#house-model");
+    const exteriorButton = document.querySelector("#exterior-view");
+    const interiorButton = document.querySelector("#interior-view");
+
+    function activate(button) {
+      [exteriorButton, interiorButton].forEach((item) => item.classList.toggle("is-active", item === button));
+    }
+
+    exteriorButton.addEventListener("click", () => {
+      model.autoRotate = true;
+      model.cameraTarget = "auto auto auto";
+      model.cameraOrbit = "45deg 65deg 90%";
+      model.fieldOfView = "auto";
+      model.jumpCameraToGoal();
+      activate(exteriorButton);
+    });
+
+    interiorButton.addEventListener("click", () => {
+      const center = model.getBoundingBoxCenter();
+      const size = model.getDimensions();
+      const radius = Math.max(size.x, size.z) * 0.035;
+      model.autoRotate = false;
+      model.cameraTarget = `${center.x}m ${center.y + size.y * 0.12}m ${center.z}m`;
+      model.cameraOrbit = `20deg 78deg ${radius}m`;
+      model.fieldOfView = "55deg";
+      model.jumpCameraToGoal();
+      activate(interiorButton);
+    });
+  </script>
 </body>
 </html>
