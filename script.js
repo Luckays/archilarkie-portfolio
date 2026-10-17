@@ -34,11 +34,14 @@ document.querySelectorAll('[data-carousel]').forEach((carousel, carouselIndex) =
   const track = carousel.querySelector('.project-track');
   const slides = [...carousel.querySelectorAll('.project-slide')];
   const currentLabel = carousel.querySelector('.current');
+  const totalLabel = carousel.querySelector('.total');
   const previous = carousel.querySelector('.carousel-prev');
   const next = carousel.querySelector('.carousel-next');
   let index = 0;
   let pointerStart = null;
   let pointerDelta = 0;
+
+  if (totalLabel) totalLabel.textContent = String(slides.length).padStart(2, '0');
 
   const show = (newIndex) => {
     index = (newIndex + slides.length) % slides.length;
@@ -79,6 +82,69 @@ document.querySelectorAll('[data-carousel]').forEach((carousel, carouselIndex) =
   const initialSlide = requestedProject === carouselIndex + 1 && requestedSlide > 0 ? requestedSlide - 1 : 0;
   show(initialSlide);
 });
+
+const lightbox = document.querySelector('#image-lightbox');
+
+if (lightbox) {
+  const lightboxImage = lightbox.querySelector('img');
+  const lightboxCaption = lightbox.querySelector('figcaption');
+  const lightboxCount = lightbox.querySelector('.lightbox-count');
+  const closeButton = lightbox.querySelector('.lightbox-close');
+  const previousButton = lightbox.querySelector('.lightbox-prev');
+  const nextButton = lightbox.querySelector('.lightbox-next');
+  let gallery = [];
+  let activeIndex = 0;
+
+  const renderLightbox = (newIndex) => {
+    activeIndex = (newIndex + gallery.length) % gallery.length;
+    const source = gallery[activeIndex];
+    const caption = source.closest('figure')?.querySelector('figcaption')?.textContent || source.alt;
+    lightboxImage.src = source.currentSrc || source.src;
+    lightboxImage.alt = source.alt;
+    lightboxCaption.textContent = caption;
+    lightboxCount.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(gallery.length).padStart(2, '0')}`;
+    const hasMultiple = gallery.length > 1;
+    previousButton.hidden = !hasMultiple;
+    nextButton.hidden = !hasMultiple;
+  };
+
+  const openLightbox = (source) => {
+    const project = source.closest('.project');
+    gallery = [...project.querySelectorAll('.project-slide:not(.project-model) > img')];
+    activeIndex = gallery.indexOf(source);
+    renderLightbox(activeIndex);
+    lightbox.showModal();
+    document.body.classList.add('dialog-open');
+  };
+
+  document.querySelectorAll('.project-slide:not(.project-model) > img').forEach((image) => {
+    image.tabIndex = 0;
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', `Zvětšit: ${image.alt}`);
+    image.addEventListener('click', () => openLightbox(image));
+    image.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openLightbox(image);
+      }
+    });
+  });
+
+  previousButton.addEventListener('click', () => renderLightbox(activeIndex - 1));
+  nextButton.addEventListener('click', () => renderLightbox(activeIndex + 1));
+  closeButton.addEventListener('click', () => lightbox.close());
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) lightbox.close();
+  });
+  lightbox.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') renderLightbox(activeIndex - 1);
+    if (event.key === 'ArrowRight') renderLightbox(activeIndex + 1);
+  });
+  lightbox.addEventListener('close', () => {
+    document.body.classList.remove('dialog-open');
+    lightboxImage.removeAttribute('src');
+  });
+}
 
 const cvPanel = document.querySelector('#cv');
 if (cvPanel && window.location.hash === '#cv') {
