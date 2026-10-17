@@ -63,7 +63,6 @@ document.querySelectorAll('[data-carousel]').forEach((carousel, carouselIndex) =
     if (event.target.closest('model-viewer, button')) return;
     pointerStart = event.clientX;
     pointerDelta = 0;
-    carousel.setPointerCapture(event.pointerId);
   });
 
   carousel.addEventListener('pointermove', (event) => {
