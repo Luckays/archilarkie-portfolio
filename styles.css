@@ -47,7 +47,7 @@ button { font: inherit; }
 
 .hero { min-height: 100svh; display: grid; grid-template-columns: 58% 42%; position: relative; }
 .hero-image-wrap { min-height: 100svh; position: relative; overflow: hidden; }
-.hero-image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.05); animation: reveal 1s cubic-bezier(.2,.7,.2,1) both; }
+.hero-image { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; filter: saturate(.9) contrast(1.03); animation: reveal 1s cubic-bezier(.2,.7,.2,1) both; }
 .hero-image-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,23,20,.12), rgba(23,23,20,.02)); }
 .hero-index { position: absolute; z-index: 1; bottom: 2rem; left: var(--pad); font-size: .75rem; letter-spacing: .12em; }
 .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 7rem var(--pad) 4rem; }
@@ -68,9 +68,9 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .about-copy p { color: #50504a; margin: 0 0 1.25rem; }
 .outline-link { display: inline-block; margin-top: 1.25rem; padding: .85rem 1.2rem; border: 1px solid var(--ink); text-decoration: none; transition: .2s; }
 .outline-link:hover { background: var(--ink); color: var(--paper); }
-.portrait-frame { margin: 3rem 0 0; aspect-ratio: 4/5; overflow: hidden; }
-.portrait-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0); transition: filter .4s; }
-.portrait-frame:hover img { filter: grayscale(1); }
+.portrait-frame { grid-column: 3 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(.7rem,1.4vw,1.25rem); margin: 0; }
+.portrait-frame img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center; transition: transform .4s cubic-bezier(.2,.75,.25,1), box-shadow .4s; }
+.portrait-frame img:hover { transform: translateY(-.55rem); box-shadow: 0 1.25rem 2.8rem rgba(23,23,20,.18); }
 
 .portfolio { background: var(--ink); }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
