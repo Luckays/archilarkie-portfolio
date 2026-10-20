@@ -48,5 +48,13 @@
       </section>
     </aside>
   </main>
+  <script>
+    if (new URLSearchParams(location.search).get('project') === 'roubenka') {
+      document.title = 'BIM model — Nový RD s duchem původní roubenky';
+      document.querySelector('.back-link').href = '../index.html?project=2&slide=10#portfolio';
+      document.querySelector('.viewer-title span').textContent = 'BIM / 02';
+      document.querySelector('.viewer-title h1').textContent = 'Nový RD s duchem původní roubenky';
+    }
+  </script>
 </body>
 </html>
