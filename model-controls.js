@@ -45,8 +45,8 @@
       const size = model.getDimensions();
       const radius = Math.max(size.x, size.z) * 0.02;
       model.autoRotate = false;
-      model.cameraTarget = `${center.x}m ${center.y - size.y * 0.1}m ${center.z}m`;
-      model.cameraOrbit = `200deg 88deg ${radius}m`;
+      model.cameraTarget = explorer.dataset.interiorTarget || `${center.x}m ${center.y - size.y * 0.1}m ${center.z}m`;
+      model.cameraOrbit = explorer.dataset.interiorOrbit || `200deg 88deg ${radius}m`;
       setFocalLength(16);
       model.jumpCameraToGoal();
       interiorMode = true;
