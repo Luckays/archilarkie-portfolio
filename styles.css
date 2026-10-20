@@ -212,7 +212,7 @@ footer p { color: var(--muted); }
 .lightbox-count { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: .78rem; letter-spacing: .1em; text-align: center; }
 @keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
 
-@keyframes reveal { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+@keyframes reveal { from { opacity: 0; transform: scale(1.075); } to { opacity: 1; transform: scale(1.035); } }
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
