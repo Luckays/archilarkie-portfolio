@@ -89,6 +89,7 @@ h1 { font-size: clamp(4rem, 6vw, 7rem); }
 .project:nth-child(even) { grid-template-columns: minmax(18rem, .9fr) minmax(0, 2.1fr); }
 .project:nth-child(even) .project-media { grid-column: 2; }
 .project:nth-child(even) .project-info { grid-column: 1; grid-row: 1; }
+.project[hidden] { display: none !important; }
 .project.is-hidden { display: none; }
 .project-media { position: relative; min-width: 0; overflow: hidden; background: #292925; touch-action: pan-y; }
 .project-track { display: flex; transition: transform .55s cubic-bezier(.22,.72,.22,1); will-change: transform; }
